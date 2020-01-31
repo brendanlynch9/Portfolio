@@ -1,0 +1,27 @@
+<html>
+	<head>
+		<title>Curtain</title>
+		<link type="text/css" rel="stylesheet" href="curtain.css">
+	
+	</head>
+	<body>
+		<div class="wrap">
+			<label for="control_btn">
+				<div class="curtain">
+					<video poster="url(../images/writing.jpeg)" id="bgvid" playsinline autoplay muted loop>
+  <!-- WCAG general accessibility recommendation is that media such as background video play through only once. Loop turned on for the purposes of illustration; if removed, the end of the video will fade in the same way created by pressing the "Pause" button  -->
+<source src="../images/Earth2.webm" type="video/webm">
+<source src="../images/Earth2.mp4" type="video/mp4">
+</video>
+					<input type="checkbox" id="control_btn" checked/>
+					<div class="left-side">
+						<img src="../images/curtain.png" id="left-image" alt=" left Curtain"/>
+					</div>
+					<div class="right-side">
+						<img src="../images/curtain.png" id="right-image" alt="Right Curtain"/>
+					</div>
+				</div>
+			</label>
+		</div>
+	</body>
+</html>

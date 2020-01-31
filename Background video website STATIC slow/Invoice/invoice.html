@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Invoice</title>
+		<link rel="stylesheet" href="invoice.css">
+
+		<script src="invoice.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>Invoice</h1>
+			<address contenteditable>
+				<p>Star Drone</p>
+				<p>955 Westcott #57<br>Houston, Texas 77007</p>
+				<p>(832) 208-9462 (text only please.)</p>
+			</address>
+			<span><img alt="" src="../images/star2.png"><input type="file" accept="image/*"></span>
+		</header>
+		<article>
+			<h1>Recipient</h1>
+			<address contenteditable>
+				<p>Per contract<br>c/o Purchaser</p>
+			</address>
+			<table class="meta">
+				<tr>
+					<th><span contenteditable>Invoice #</span></th>
+					<td><span contenteditable>101138</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Date</span></th>
+					<td><span contenteditable>January 1, 2018</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Amount Due</span></th>
+					<td><span id="prefix" contenteditable>$</span><span>600.00</span></td>
+				</tr>
+			</table>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<th><span contenteditable>Item/ Work Order Number/Raw or Processed Data</span></th>
+						<th><span contenteditable>Address/ Date flown</span></th>
+						<th><span contenteditable>Rate</span></th>
+						<th><span contenteditable>Quantity</span></th>
+						<th><span contenteditable>Price</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a class="cut">-</a><span contenteditable>UAS services Work order #12345, Per contract Raw data</span></td>
+						<td><span contenteditable>123 smith street Sugar Land Texas, Flown on: 01/01/2018</span></td>
+						<td><span data-prefix>$</span><span contenteditable>500.00</span></td>
+						<td><span contenteditable>1</span></td>
+						<td><span data-prefix>$</span><span>600.00</span></td>
+					</tr>
+				</tbody>
+			</table>
+			<a class="add">+</a>
+			<table class="balance">
+				<tr>
+					<th><span contenteditable>Total</span></th>
+					<td><span data-prefix>$</span><span>600.00</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Amount Paid</span></th>
+					<td><span data-prefix>$</span><span contenteditable>0.00</span></td>
+				</tr>
+				<tr>
+					<th><span contenteditable>Balance Due</span></th>
+					<td><span data-prefix>$</span><span>600.00</span></td>
+				</tr>
+			</table>
+		</article>
+		<aside>
+			<h1><span contenteditable>"The universe is wider than our views of it."- Henry David Thoreau</span></h1>
+			<div contenteditable>
+				<p>We thank you for your patronage and look forward to working with you again!</p>
+			</div>
+		</aside>
+	</body>
+</html>

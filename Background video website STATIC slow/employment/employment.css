@@ -1,0 +1,246 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -o-box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #cccc;
+}
+
+.megamenu {
+  height: 50px;
+  width: 80%;
+  max-width: 1024px;
+  margin: auto;
+  background: #fff;
+  margin-bottom: 250px;
+}
+
+.megamenu > ul {
+  height: 100%;
+  position: relative;
+}
+
+.megamenu > ul > li {
+  float: left;
+  height: 100%;
+  position: initial;
+}
+
+.megamenu > ul > li > nav {
+  position: absolute;
+  perspective: 500px;
+  left: 0;
+  width: 100%;
+}
+
+.megamenu > ul > li > a {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+  height: 100%;
+  display: block;
+  padding: 15px 15px;
+  text-decoration: none;
+  position: relative;
+  color: #444;
+  transition: all 0.5s ease;
+  transition-delay: 0.2s;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.megamenu > ul > li > a .fa {
+  margin-right: 0.5em;
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.megamenu > ul > li > a:after {
+  content: '\25be';
+  margin-left: 0.5em;
+  color: rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  transform-origin: 50% 60% 0;
+  transition: transform 0.3s 0.2s ease-in;
+}
+
+.megamenu > ul > li:hover > a:after {
+  transform: rotateZ(180deg);
+}
+
+.megamenu > ul > li:hover > a {
+  background: #0277bd;
+  color: #fff;
+}
+
+.megamenu > ul > li:hover > nav > ul {
+  transform: rotateX(0deg);
+  transition-delay: 0.2s;
+  opacity: 1;
+  z-index: 1;
+}
+
+.megamenu > ul > li:nth-child(1) > a {
+  border-bottom-color: #00FF41;
+}
+
+.megamenu > ul > li:nth-child(1):hover > a,
+.megamenu > ul > li:nth-child(1) > nav > ul {
+ 
+}
+
+.megamenu > ul > li:nth-child(2) > a {
+  border-bottom-color: #00FF41;
+}
+
+.megamenu > ul > li:nth-child(2):hover > a,
+.megamenu > ul > li:nth-child(2) > nav > ul {
+  
+}
+
+.megamenu > ul > li:nth-child(3) > a {
+  border-bottom-color: #00FF41;
+}
+
+.megamenu > ul > li:nth-child(3):hover > a,
+.megamenu > ul > li:nth-child(3) > nav > ul {
+ 
+}
+
+.megamenu > ul > li:nth-child(4) > a {
+  border-bottom-color: #00FF41;
+}
+
+.megamenu > ul > li:nth-child(4):hover > a,
+.megamenu > ul > li:nth-child(4) > nav > ul {
+  
+}
+
+.megamenu > ul > li > nav > ul {
+  color: #fff;
+  position: absolute;
+  left: 0;
+  padding: 0px;
+  width: 100%;
+  z-index: -2;
+  transform: rotateX(-90deg);
+  transform-origin: top center;
+  transition: all 0.3s ease-out;
+  transition-delay: 0.3s;
+  transform-style: preserve-3d;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-flow: row;
+  min-height: 200px;
+  opacity: 0;
+}
+
+.megamenu > ul > li > nav > ul img {
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, .4);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.megamenu > ul > li > nav > ul li.bg {
+  opacity: 0.1;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.megamenu > ul > li > nav > ul li.bg img {
+  width: 100%;
+  height: 100%;
+}
+
+.megamenu > ul > li > nav > ul > li {
+  padding: 20px;
+  line-height: 1.4em;
+  font-size: 13px;
+  flex: 1;
+  min-width: 25%;
+  min-height: 0px;
+}
+
+.megamenu > ul > li > nav > ul > li:nth-child(even) {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.megamenu > ul > li > nav > ul > li > h3 {
+  font-weight: bold;
+  line-height: 1.1em;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.megamenu > ul > li > nav > ul > li > ul {
+  list-style: square;
+  padding-left: 20px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.megamenu > ul > li > nav > ul > li > ul > li > a {
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 5px;
+  display: block;
+  text-decoration: none;
+}
+
+.megamenu > ul > li > nav > ul > li > ul > li > a:hover {
+  color: #fff;
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 360px;
+  
+  padding: 20px;
+}
+
+footer {
+  display: block;
+  position: fixed;
+  text-align: center;
+  color: #ddd;
+  font-weight: normal;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+  font-size: 0.8em;
+  bottom: 10px;
+  right: 0;
+  padding: 20px;
+}
+
+footer a,
+footer a:link {
+  color: #fff;
+  text-decoration: none;
+}
+
+body,html {
+  height: 5%;
+}
+
+.wrapper {
+  min-height: 100%;
+}
+video { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+ background: url('//demosthenes.info/assets/images/polina.jpg') no-repeat;
+  background-size: cover;
+  transition: 1s opacity;
+}
