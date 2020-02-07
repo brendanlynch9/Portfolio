@@ -9067,5 +9067,148 @@ pip install openpyxl
 then on the TERMINAL of pycharm paste it
 
 pip= the installer for Python.
+Excel Spreadsheet  
+An automation to process 1,000's of spreadsheets at a time.
+ok so first how do we get a excel spreadsheet to Pycharm? well Right click the project folder and go to show in explorer--> drag or copy and paste the excel sheet you want to work with here. Then to access the Sheet you need to write code like this:
+
+import openpyxl as xl
+wb = xl.load_workbook('transactions.xlsx')
+sheet = wb['Sheet1']
+cell =sheet ['a1']
+cell = sheet.cell(1,1)
+print(cell.value)
+
+that code will access and return whatever is in the first cell (top left ofthe spreadsheet) and display it on the console.
+
+it returns: transaction_id
+
+
+ 
+transaction_id	product_id	price 	   
+1001	1	5.95	   
+1002	2	6.95	   
+1003	3	7.95	 
+
+what we are going to do is say like in normal life... Whoops someone entered the wrong data on the spreadsheet and we need to adjust the prices by 10%...or its a sale an we need to adjust them all by 10% whatever...
+
+to do that manually would be laborious. Instead we can write a program like this:
+
+first we need to know how many rows does this sheet have? We can get that from the sheet object like this:
+import openpyxl as xl
+wb = xl.load_workbook('transactions.xlsx')
+sheet = wb['Sheet1']
+cell =sheet ['a1']
+cell = sheet.cell(1,1)
+print(sheet.max_row)
+
+it returns: 4 (1 row of titles and 3 products...)
+
+So we need to generate a for loop that will go over all the rows from 1-4. like this:
+import openpyxl as xl
+wb = xl.load_workbook('transactions.xlsx')
+sheet = wb['Sheet1']
+cell =sheet ['a1']
+cell = sheet.cell(1,1)
+
+for row in range(1, sheet.max_row + 1):
+    print(row)
+
+returns:
+1
+2
+3
+4
+
+Now thats good we are itterating over the entire sheet... But we only want to adjust the numbers rows not the titles and we only need the numbers from the third column so we can adjust the code like this:
+
+import openpyxl as xl
+wb = xl.load_workbook('transactions.xlsx')
+sheet = wb['Sheet1']
+cell =sheet ['a1']
+cell = sheet.cell(1,1)
+
+for row in range(2, sheet.max_row + 1):
+    cell = sheet.cell(row,3)
+    print(cell.value)
+
+this returns:
+5.95
+6.95
+7.95
+
+next we neeed to multiply each one by 0.9 because we are going to fix the wrong input numbers by 10 percent! Then we have to take this corrected price and put it into a new column...and finally we need to save the corrected sheet as a different file (in case we have a bug we dont want to overwite the original) To do this we can code it like this:
+import openpyxl as xl
+wb = xl.load_workbook('transactions.xlsx')
+sheet = wb['Sheet1']
+cell =sheet ['a1']
+cell = sheet.cell(1,1)
+
+for row in range(2, sheet.max_row + 1):
+    cell = sheet.cell(row,3)
+    corrected_price = cell.value * 0.9
+    corrected_price_cell = sheet.cell(row, 4)
+    corrected_price_cell.value = corrected_price
+
+wb.save('transactions2.xlsx')
+
+now when we view the new spreadsheet it will have the fourth column with updated prices. Beautiful.
+ 
+transaction_id	product_id	price 		   
+1001	1	5.95	5.355	   
+1002	2	6.95	6.255	   
+1003	3	7.95	7.155	 
+
+now whoops the boss wants to be able to see a bar chart too! ok fine...
+first we need to import charts and barchart and reference ... then we need to select the 4th column data that we want to make into a chart. We want to select the cells from row 2 to the end of the sheet...then we want the bar graph to begin on the 2nd row on a new fifth column. Next to the data....
+
+import openpyxl as xl
+from openpyxl.chart import BarChart, Reference
+
+wb = xl.load_workbook('transactions.xlsx')
+sheet = wb['Sheet1']
+cell =sheet ['a1']
+cell = sheet.cell(1,1)
+
+for row in range(2, sheet.max_row + 1):
+    cell = sheet.cell(row,3)
+    corrected_price = cell.value * 0.9
+    corrected_price_cell = sheet.cell(row, 4)
+    corrected_price_cell.value = corrected_price
+values = Reference(sheet,
+          min_row=2,
+          max_row=sheet.max_row,
+          min_col=4,
+          max_col=4)
+chart = BarChart()
+chart.add_data(values)
+sheet.add_chart(chart, 'e2')
+wb.save('transactions2.xlsx')
+
+but this work is dirty. Lets make it look professional and make it into a function that can be used on any project to automate the updating of cells:
+
+import openpyxl as xl
+from openpyxl.chart import BarChart, Reference
+
+def process_workbook(filename):
+
+    wb = xl.load_workbook(filename)
+    sheet = wb['Sheet1']
+
+    for row in range(2, sheet.max_row + 1):
+        cell = sheet.cell(row,3)
+        corrected_price = cell.value * 0.9
+        corrected_price_cell = sheet.cell(row, 4)
+        corrected_price_cell.value = corrected_price
+    values = Reference(sheet,
+              min_row=2,
+              max_row=sheet.max_row,
+              min_col=4,
+              max_col=4)
+    chart = BarChart()
+    chart.add_data(values)
+    sheet.add_chart(chart, 'e2')
+    wb.save(filename)
+
+there. Perfect.
 
 ->
