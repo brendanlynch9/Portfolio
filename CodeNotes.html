@@ -7950,5 +7950,1122 @@ install VS community -> you need to install asp.net package for studio community
 after install -> if you dont have the extensions installed .... under extensions-> manage extensions->install the plugins entitled :"productivity power tools", and "web essentials", and "resharper" (optional because it costs money) plugins.
 in the solutions window (CTRL + ALT +L) drill down to index.cshtml and right click andopen in browser (say yes to the SSL certificate)-> your ready to start coding.
 
+PYTHON
+Python Tutorial for Beginners [Full Course] Learn Python for Web Development by Mosh Hamedani
+setup and installation is easy, and here are the steps:
+head over to python.org-->downloads-->download latest version-->run installer-->check the "add python to path" its very important. 
+now you need a code editor (pycharm)--> https://www.jetbrains.com/pycharm/
+download the community edition-->run the wizard & click next next next all the way through. (make sure you add to path and check the one for a desktop icon as well).
+choose darcula-->next-->start using pycharm-->click on create new project name it helloWorld or whatever.
+right click on python folder-->add>new-->python file-->name it "app.py" (by convention all python files should have this)
+write your first code:
+print('Brendan Lynch')
+then alt+shift+f10 to run it
+
+			How code gets executed in python
+now we are going to draw a dog with  code like this:
+print('Brendan Lynch')
+print("o----")
+print("|| ||")
+
+(**there is a green run button on top right of pycharm GUI to run it too)
+basically you will see that Python code gets run line by line from the top. OK but if we change the code with some asterisks...
+print('Brendan Lynch')
+print("o----")
+print("|| ||")
+print('*' *10)
+we are telling python to multiply whats inside the quotes ten times...which gives our dog a ground he is walking on :)~ (this is also called an "expression" in coding).
+
+				Variables for Python
+price =10
+print(price)
+you will see 10 on the screen. 
+but what if the code is like this?
+price =10
+price=20
+print(price)
+you will see 20 on the screen because python interprets and runs the code line by line and 20 was the last price before the print.
+now whole numbers are known as integers. Numbers with decimals are known as floats. strings are things in quotes in python. Booleans are true false statements.
+Python is CASE SENSITIVE. When defining variables use lower case seperated with underscores...but when setting them to false for example or true you need to write False or True with capital letters!
+price =10
+rating=4.9
+name="brendan"
+is_published= False
+print(price)
+so imagine we have a patient in a hospital and he is 20 years old and he is a new patient...so define three variables for his name and his age and to see if he is an existing patient:
+full_name= "John Smith"
+age= 20
+is_new= True
+
+				Getting Inputs in python
+So we have learned how to print things to the terminal ...instead we are going to write a program that asks the user for their name.
+name = input('What is your name? ')
+print ('Hi ' + name)
+then in the terminal window type your name and it will run the second line of code. It will tell me for example Hi brendan
+but what if we want to ask two questions and get two inputs and use them together?
+name = input('What is your name? ')
+print('Hi ' + name)
+color = input("What is your favorite color? ")
+print(name + ' likes the color ' + color)
+
+				Type Conversion
+we want to write a program where people input a birth year and we tell them how old they are? Easy right? here:
+birth_year=input('Birth Year: ')
+age=2020 - birth_year
+print(age)
+the problem is if we run it like this we will get an error. Because we are subtracting a string from and integer! the terminal says this:
+Traceback (most recent call last):
+  File "C:/Users/brendan/PycharmProjects/helloWorld/app.py", line 2, in <module>
+    age=2020 - birth_year
+TypeError: unsupported operand type(s) for -: 'int' and 'str'
+
+to fix this problem we need to convert the input into a integer! we can convert a string into an integer with 
+int()
+or we can convert it into a float ( a number with a decimal) with:
+float()
+or we can even convert it into a boolean with:
+bool()
+
+so to fix this code we need to write it like this:
+birth_year=input('Birth Year: ')
+age=2020 - int(birth_year)
+print(age)
+basically we pass birth_year into an integer.
+
+so as another exercise: Ask a user their weight in pounds and convert it to kilograms and output it on the terminal.
+weight_lbs= input("weight in lbs: ")
+weight_kg= weight_lbs * 0.45
+print(weight_kg)
+this returns the error:
+Traceback (most recent call last):
+  File "C:/Users/brendan/PycharmProjects/helloWorld/app.py", line 2, in <module>
+    weight_kg= weight_lbs * 0.45
+TypeError: can't multiply sequence by non-int of type 'float'
+
+and we can fix it by passing the input into a float....
+weight_lbs= input("weight in lbs: ")
+weight_kg= float(weight_lbs) * 0.45
+print(weight_kg)
+
+					Strings in Python
+An example of why you should use double quotes for your strings. Notice the apostrophe s......if you had used single quotes you would have ended the string there....
+course="Python's Course for Beginners"
+print(course)
+
+But what if you want to " " something??... well do the opposite. Like this:
+course= 'Pythons Course for "Beginners" '
+print(course)
+
+But what if you want to have a string for an entire email or something?? you use triple quotes:
+course= ''' 
+Hi John, 
+
+Here is our first email to you.
+
+All the best, 
+The support team
+'''
+print(course)
+
+Now for index. Python has both positive and negative index. So if we have our code like this and the sqaure brackets ...we will return several different possible things:
+course = 'Python for Beginners'
+print(course[] )
+
+if we had:
+name='Jennifer'
+print(name[1:-1])
+
+it would return ennife
+
+					Formatted Strings
+suppose we wanted the message : 
+John [Smith] is a coder 
+we could code it like this:
+first ='John'
+last='Smith'
+message= first + ' [' + last + '] is a coder'
+print(message)
+but this gets really hard to read as a coder because you have to visualize all these string concatenations in your head!
+This is where we use formatted strings it makes it easier for us to visualize the output.
+so we change the code to:
+first ='John'
+last='Smith'
+message= first + ' [' + last + '] is a coder'
+msg = f'{first} [{last}] is a coder'
+print(msg)
+
+the f means formatted (make sure there is no space between it and the quote of the string as this will crash your app). But notice how much easier it is to visualize than the concatenation!! So to use formatted strings simply prefix the quote with an f and put the variables in curly braces. 
+
+				String Methods 
+course='Python for Beginners'
+print(len(course))
+gives you 20. its just the length of the string.
+course='Python for Beginners'
+print(course.upper())
+
+gives you:  PYTHON FOR BEGINNERS
+course='Python for Beginners'
+print(course.lower())
+gives you: python for beginners
+course='Python for Beginners'
+print (course.find('P'))
+
+gives you: 0 (the index of the first occurrence. Note the find method is case sensitive to what your searching for).
+course='Python for Beginners'
+print (course.replace('Beginners', 'Absolute Beginners'))
+gives you: Python for Absolute Beginners
+
+				Arithmetic Operators for Python
+print(10 + 3)
+13
+print(10 - 3)
+7
+print(10 * 3)
+30
+print(10 / 3)
+3.3333333335
+print(10 // 3)
+3 (drops the decimal and gives just the integer)
+print(10 % 3)
+1 (gives the remainder. Also known as a modulus)
+print(10 ** 3)
+1000 (exponents)
+
+
+x=10
+x=x+3
+print(x)
+13
+
+another way to write the above is to simply write
+x=10				or			x=10
+x+=3							x-=3
+print(x)						print(x)
+13							7
+
+
+	PEMDAS applies in Python code..parentheses exponents multiplication division addition subtraction in that order
+x=10 + 3*2
+16
+
+				Math operators
+Rounding Numbers
+x=2.9
+print(round(x) )
+3
+Absolute Value
+x= -2.9
+print(abs(x) )
+2.9
+Now thats all great but what happens if we want to do some advanced math? We need to import a module and to do that we simply code it like this:
+import math
+print(math.ceil(2.9) )
+
+to look at all the possible functions of the math import math. operator go to:
+https://docs.python.org/3/library/math.html
+
+					Conditions
+
+Basically if/else statements. To write them in python here is an example:
+is_hot= False
+if is_hot:
+	print("Its a hot day")
+	print("drink plenty of water")
+else:
+	print("Its a cold day")
+	print("Wear warm clothes")
+print("Enjoy your day")
+gives the message:
+Its a cold day
+Wear warm clothes
+Enjoy your day
+but if we change the is_hot to True... we get a different message:
+is_hot=True
+if is_hot:
+	print("Its a hot day")
+	print("drink plenty of water")
+else:
+	print("Its a cold day")
+	print("Wear warm clothes")
+print("Enjoy your day")
+Its a hot day
+drink plenty of water
+Enjoy your day 
+
+but with this we never just print its a lovely day... We are always saying its either hot or not hot. There is no condition for if its cold...and what if its neither hot nor cold but just a lovely day?  To fix this we need to set another condition like this:
+is_hot= False
+is_cold=True
+if is_hot:
+	print("Its a hot day")
+	print("drink plenty of water")
+elif is_cold:
+    print("Its a cold day")
+    print("Wear warm clothes")
+else:
+    print("Its a lovely day. Enjoy your day")
+Now as a challenge here we want a program ...Imagine the price of a house is 1 million dollars. If the buyer has good credit they need to put down 10% otherwise they need to put down 20%. Print the down payment required.
+price= 1000000
+has_good_credit= True
+
+if has_good_credit:
+    down_payment=0.1 * price
+else:
+    down_payment=0.2 * price
+print(f'Down Payment: ${down_payment}')
+returns $100000
+				Logical Operators
+
+If an applicant has high income AND good credit then they are eligible for a loan.
+
+has_high_income=True
+has_good_credit=True
+
+if has_high_income and has_good_credit:
+    print("Eligible for loan")
+
+but if either of the conditions are set to false then it will not display the "eligible for loan".
+
+but if we change the query:
+If an applicant has high income OR  good credit then they are eligible for a loan.
+has_high_income=True
+has_good_credit=True
+
+if has_high_income OR has_good_credit:
+    print("Eligible for loan")
+
+
+					Comparison Operators
+Now we are going to look at comparison Operators in this manner:
+if Temperature is greater than 30 
+	it's a hot Day
+otherwise if its less than 10
+	its a cold day
+otherwise
+	its neither hot nor cold
+temperature=35
+
+if  temperature > 30:
+    print("Its a hot day")
+else:
+    print("Its not a hot day")
+the signs are:
+ <  (less than)
+> (greater than)
+  >= (gretaer than or equal to)
+<= (less than or equal to)
+== (equal to..notice its two = signs...thats for comparison because otherwise your setting the temperature in python)
+!= (not equal to)
+
+Now we can use this for form validations for example on length of name inputs, like this:
+name="j"
+
+if len(name) < 3:
+    print("Name must be at least 3 characters long")
+elif len(name) > 50:
+    print("Name must be a maximum of 50 characters long")
+else:
+    print("Name looks good")
+a better calculator for weights... it converts lbs. to kilos and vice versa...depending on if the input is an l or k...
+weight = int(input('Weight: '))
+unit = input('(L)bs or (K)g: ')
+if unit.upper() == "L":
+    converted= weight * 0.45
+    print(f"You are {converted} kilograms")
+else:
+    converted= weight / 0.45
+    print(f"Tou are {converted} pounds")
+
+				While loops
+i=1
+while i <= 5:
+    print (i)
+    i = i+1
+set the initial value. While the initial value is less than or equal to 5 print the initial value, then set the next initial value to the previous one plus one.
+so this prints 
+1
+2
+3
+4
+5
+				For Loops
+For loops in python we use it to iterate over a collection of items. 
+for item in "Python ":
+    print(item)
+prints:
+P
+y
+t
+h
+o
+n
+
+Now to change what we are itterating over from a string to say a list we use square brackets like this:
+for item in []:
+    print(item)
+here we can define a list of emails, blog posts, products...whatever.
+for item in ['Brendan', 'Gracie', 'Carol', 'Daisy', "Grace", 'Kitty', 'Suzie', 'Lucy']:
+    print(item)
+but what about numbers? ...yep those too:
+for item in [1,2,3,4]:
+    print(item)
+but what if we want a million numbers??? do we have to type a million numbers?? no. Here:
+for item in range(10):
+    print(item)
+returns:
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+but not 10!!! 
+for item in range(5,10):
+    print(item)
+gives the numbers from 5-10
+
+ok so lets make a loop that itterates over a bunch of product costs and tallies it for the customer: 
+prices=[10,20,30]
+total= 0
+
+for item in prices:
+    total += item
+print(f"Total: {total}")
+
+returns 60
+
+					Nested Loops
+basically it means adding one loop inside another. For example a list of coordinates.
+lets say you want:
+(x,y)
+
+
+for x in range(4):
+    for y in range(3):
+        print(f"({x}, {y})")
+returns:
+(0, 0)
+(0, 1)
+(0, 2)
+(1, 0)
+(1, 1)
+(1, 2)
+(2, 0)
+(2, 1)
+(2, 2)
+(3, 0)
+(3, 1)
+(3, 2)
+
+Process finished with exit code 0
+
+					Lists
+names= ["Brendan","Carol" ,"Gracie", "Carol"]
+print(names)
+
+if we print the above and run it:
+['Brendan', 'Carol', 'Gracie', 'Carol']
+
+if we modify the code to lets say:
+names= ["Brendan","Carol" ,"Gracie", "Carol"]
+print(names[1])
+
+then we get:
+Carol
+
+if we modify the code to lets say:
+names= ["Brendan","Carol" ,"Gracie", "Carol", "jack", "Aida", "sammy"]
+print(names[2:])
+
+then we get:
+['Gracie', 'Carol', 'jack', 'Aida', 'sammy']
+
+if we modify the code like this we can change settings:
+names= ["Brendan","Carol" ,"Gracie", "Carol", "jack", "Aida", "sammy"]
+names[0]="Bear"
+print(names[2:])
+print(names)
+
+this returns:
+['Gracie', 'Carol', 'jack', 'Aida', 'sammy']
+['Bear', 'Carol', 'Gracie', 'Carol', 'jack', 'Aida', 'sammy']
+
+notice that the first returned array gives everything from position 2 to the end. but the second print statement takes into account the modification we made in the second line of code and changes brendan to bear.
+
+so as a challenge for understanding lists write a program that can itterate over an array of random numbers and give back the largest number.
+like this:
+numbers=[3,6,2,8,4,10]
+max=numbers[0]
+for number in numbers:
+    if number > max:
+        max=number
+print(max)
+
+
+				2D Lists
+this is useful for machine learning because of matrices. Basically its a list of lists. Each item in the master array is an array itself. You write a matrix like this:
+matrix =[
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+]
+
+now that its written how do you acces a particualr thing? Like this:
+matrix =[
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+]
+print(matrix[0][1])
+
+this returns: 2
+
+now that we know how to acces something how do we change a particular thing?
+matrix =[
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+]
+matrix[0][1]=20
+print(matrix[0][1])
+
+this returns: 20
+
+to print off the entire matrix:
+matrix =[
+    [1,2,3],
+    [4,5,6],
+    [7,8,9]
+]
+for row in matrix:
+    for item in row:
+        print(item)
+
+				List functions
+ok so we have a list:
+numbers=[5,2,1,7,4]
+
+if we wanted to append a 20 to the end of the list we just write:
+numbers=[5,2,1,7,4]
+numbers.append(20)
+print(numbers)
+
+but what if we wanted to insert the 20 to a specific place in the array? We write it like this:
+numbers=[5,2,1,7,4]
+numbers.insert(0,20)
+print(numbers)
+
+to remove an item? Like this: 
+numbers=[5,2,1,7,4]
+numbers.remove(20)
+print(numbers)
+
+to empty the entire array? Like this: 
+numbers=[5,2,1,7,4]
+numbers.clear()
+print(numbers)
+
+to remove the last item in an array? Like this:
+numbers=[5,2,1,7,4]
+numbers.pop()
+print(numbers)
+
+
+so for an exercise write a program to remove the duplicates from a list:
+numbers=[2,2,4,6,3,4,6,1]
+uniques=[]
+for number in numbers:
+    if number not in uniques:
+        uniques.append(number)
+print(uniques)
+
+returns:
+[2, 4, 6, 3, 1] 
+
+				Tuples
+tuples are similar to lists... but unlike lists we cannot modify them.
+this is a list array:
+numbers=[1,2,3]
+
+this is a tuple (it uses parenthesis):
+numbers=(1,2,3)
+
+now why would we want to use a tuple? Because sometimes you want to make a list of items and make sure that nowhere in your program you accidentally modify it...you would use a tuple.
+
+				Unpacking
+ok lets say we have a tuple of some coordinates that we dont want changing anywhere in our code... but we want to be able to acces them (not modify just access)...how? Well we could write it like this:
+coordinates=(1,2,3)
+x=coordinates[0]
+y=coordinates[1]
+z=coordinates[2]
+
+but that is long and tedious. So instead we can use unpacking. The exact same thing can be coded like this:
+coordinates=(1,2,3)
+x,y,z=coordinates
+
+there. Much cleaner. Python will access the array and place the position 0 value with the X, the position 1 value with the y and the position 2 value with the z. Automatically.
+coordinates=(1,2,3)
+x,y,z=coordinates
+print(x)
+
+this returns: 1
+
+*note this is not limited to tuples. you can use unpacking with arrays too.
+coordinates=[1,2,3]
+x,y,z=coordinates
+print(x)
+
+this array code returns:1
+
+
+				Dictionaries
+this is where we want to store information that comes in key value pairs. for example a customer. In this example we can have a name email and phone number for the customer. To do this we code it like this:
+customer={
+    "name": "John Smith",
+    "age": 30,
+    "is_verified":True
+}
+
+make sure you dont duplicate keys...like giving the customer two ages....
+
+to access the information you code it like this:
+customer={
+    "name": "John Smith",
+    "age": 30,
+    "is_verified":True
+}
+print(customer["name"])
+
+now this returns: John Smith
+
+rememeber everything is CASE SENSITIVE....if you tried to print name as opposed to Name you will get an error.
+
+to change something in the dictionary you can code it like this:
+customer={
+    "name": "John Smith",
+    "age": 30,
+    "is_verified":True
+}
+customer["name"] ="Jack Smith"
+print(customer["name"])
+
+this returns: Jack Smith
+
+now you can also update the dictionary with a new key by coding it like this:
+customer={
+    "name": "John Smith",
+    "age": 30,
+    "is_verified":True
+}
+customer["birthdate"] ="January 1 1980"
+print(customer["birthdate"])
+
+this will return: January 1 1980
+
+
+				Functions in Python
+Functions are just snippets of code we can use in multiple programs. For example suppose we have these two simple lines of code:
+print('Hi there!')
+print('Welcome Aboard')
+
+we can put them in a function that we can reuse.
+def greet_user():
+    print('Hi there!')
+    print('Welcome Aboard')
+
+then we can call our function anywhere in our code we want.
+def greet_user():
+    print('Hi there!')
+    print('Welcome Aboard')
+
+print("Start")
+greet_user()
+print("Finish")
+
+this returns:
+Start
+Hi there!
+Welcome Aboard
+Finish
+
+note* whenever you write functions in python you should use two lines of space between it and the next block of code. You must also define your functions first and then call them.
+
+				Parameters
+wouldnt it be nice if we could pass some information to the functions? Like in this example instead of saying just "Hi there!" what if we could greet a person by name? To do this we need parameters... this is how you code a parameter:
+def greet_user(name):
+    print(f'Hi {name} !')
+    print('Welcome Aboard')
+
+
+print("Start")
+greet_user("John")
+print("Finish")
+
+basically you put inside the definition parenthesis the parameters you want. Then when you call the function inside the paranthesis later you define the specific thing...like John or 
+Bob or whatever.
+
+In this example we have two different parameter values being assigned (john and mary)
+def greet_user(name):
+    print(f'Hi {name} !')
+    print('Welcome Aboard')
+
+
+print("Start")
+greet_user("John")
+greet_user("Mary")
+print("Finish")
+
+this returns:
+Start
+Hi John !
+Welcome Aboard
+Hi Mary !
+Welcome Aboard
+Finish
+
+now please note when we use a parameter We HAVE to put something inas a value for the parameter when calling the function. Otherwise the app will crash.
+
+now what if you wanted to change the parameter and use Multiple parameters...like last name and first names...both? Well right click on what you want to change and select refactor--> rename it to first_name...and code:
+def greet_user(first_name, last_name):
+    print(f'Hi {first_name} {last_name} !')
+    print('Welcome Aboard')
+
+
+print("Start")
+greet_user("John", "Smith")
+print("Finish")
+
+this returns:
+Start
+Hi John Smith !
+Welcome Aboard
+Finish
+
+				Return Statement
+this is where your trying to get information back from a function. Imagine a calculator function:
+def square(number):
+    return number * number
+
+
+result = square(3)
+print(result)
+
+the terminal will return: 9
+
+you could alternatively code it like this:
+def square(number):
+    return number * number
+
+
+print(square(3))
+
+this would return 9 as well.
+
+				Creating a reusable function
+
+This function could be used in any program. To convert smiley face inputs into emojis... whether a chat application or some input window or for email whatever...
+
+def emoji_converter(message):
+    words = message.split(" ")
+    emojis = {
+        ":)": "☺️",
+        ":(": "😢 "
+    }
+    output = ""
+    for word in words:
+        output += emojis.get(word, word) + " "
+    return output
+
+
+message = input(">")
+print(emoji_converter(message))
+
+					Exceptions
+Exit code 0 means your program ran with no errors. But how can we handle errors before they begin?
+
+take for example the code:
+age = int(input('Age: '))
+print(age)
+
+here we are expecting the user to input an integer like 20 or something. But what if they input "asd"? a non integer?... well we will get an error code and our app will crash. So to stop this from happening Python has Try and Except
+
+code this like this:
+try:
+    age = int(input('Age: '))
+    print(age)
+except ValueError:
+    print('Invalid Value')
+
+then the stupid user types "asd" for an age in the terminal and it returns:
+
+Age: asd
+Invalid Value
+
+so we can also try catching other exceptions too like dividng something by zero and write the code like this:
+try:
+    age = int(input('Age: '))
+    income = 2000
+    risk = income/age
+    print(age)
+except ZeroDivisionError:
+    print("age cannot be 0.")
+except ValueError:
+    print('Invalid Value')
+
+so now if the user inputs 0 for an age it will get the message "age cannot be 0." but the app will not crash. We get an exit code of 0.
+
+				Comments
+To comment in python use # at the beginning of the line.
+
+				Classes
+So far you have only learned about simple types in python like :
+
+Strings
+Numbers 
+Booleans
+---
+and more advanced types like
+Lists
+Dictionaries
+etc.
+
+but you have not created your own type yet. When you create your own type you have created a class. For example think of a shopping cart. Its not a list or a number or a boolean. its its own thing.
+
+so we are going to define a new type called "point" and it will have methods like:
+move, draw, get distance etc.
+these are the operations we can perform on points.
+class Point:
+    def move(self):
+        print("move")
+
+    def draw(self):
+        print("draw")
+
+point1 = Point()
+point1.draw()
+
+when we run this on the terminal it returns: draw
+
+*note you always Capitalize your class names. Point is capitalized. The variable point1 is not. If your name has two or more words in it like: BrendansCellPhone each word is capitalized.
+
+Now you can assign objects variables that you can call like this:
+
+class Point:
+    def move(self):
+        print("move")
+
+    def draw(self):
+        print("draw")
+
+point1 = Point()
+point1.x = 10
+point1.y=20
+print(point1.x)
+point1.draw()
+
+this returns:
+10
+draw
+
+notice how point1 was assigned an x and y variable and we called for the X....
+
+now you can also have multiple objects of your class like this:
+class Point:
+    def move(self):
+        print("move")
+
+    def draw(self):
+        print("draw")
+
+point1 = Point()
+point1.x = 10
+point1.y=20
+print(point1.x)
+point1.draw()
+
+point2 = Point()
+point2.x=1
+print(point2.x)
+
+this returns:
+10
+draw
+1
+
+
+				Constructors
+a constructor is a function that gets called at the time of creating an object. Lets take the point objects we were working with. Can we create a point with no x or y value? sure but if we call it for the value x or y then later we will crash our app. Besides it doesnt really make sense to have a point without a x or y value right? So we can set rules tobe followed when making this object called point. This is the purpose of the constructor in coding. It says hey! if you want to create a point you need to assign it a x and y value for us....like this:
+class Point:
+    #before and after init are TWO underscores
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def move(self):
+        print("move")
+
+    def draw(self):
+        print("draw")
+
+point = Point(10,20)
+print(point.x)
+
+this returns: 10
+
+another constructor object example:
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def talk(self):
+        print(f'Hi I am {self.name}')
+
+
+john = Person("John Smith")
+john.talk()
+
+returns: Hi I am John Smith
+
+now we can add as many instances of our person class as we want to like this:
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def talk(self):
+        print(f'Hi I am {self.name}')
+
+
+john = Person("John Smith")
+john.talk()
+
+bob =Person("Bob Jones")
+bob.talk()
+
+this returns: 
+Hi I am John Smith 
+Hi I am Bob Jones
+
+					Inheritance
+Inheritance is a mechanism for reusing code. So lets pretend we have a couple classes like this:
+class Dog:
+    def walk(self):
+        print("walk")
+
+
+class Cat:
+    def walk(self):
+        print("walk")
+
+the problem with this code is it is D.R.Y. (means Dont repeat yourself). Both Classes do basically the same thing!! If there is a problem with the code and you typed out all that then you would have to go back and fix it for every Clas seperately and that takes forever!!.... So to prevent this we use inheritance. Like this:
+class Mammal:
+    def walk(self):
+        print("walk")
+
+class Dog(Mammal):
+    pass
+
+
+class Cat(Mammal):
+    pass
+
+dog1=Dog()
+dog1.walk()
+
+
+Now what the code above is doing is permitting both dog and cat to inherit all the stuff from mammal. The "pass" tells python its ok just skip this area you were expecting code because python is expecting code for every object. When we run the program with an instance of dog it can use the method walk and it returns: walk
+
+now each object can have its own methods too...but still maintain access to the parent mammal. Like this:
+class Mammal:
+    def walk(self):
+        print("walk")
+
+class Dog(Mammal):
+    def bark(self):
+        print("woof! woof!")
+
+
+class Cat(Mammal):
+    def be_annoying(self):
+        print("annoying")
+
+dog1=Dog()
+dog1.walk()
+dog1.bark()
+
+cat1=Cat()
+cat1.be_annoying()
+
+this returns:
+walk
+woof! woof!
+annoying
+
+					Modules
+We use modules to organize our code into files. Lets suppose we have this code but we want to be able to use it on any project anywhere:
+def lbs_to_kgs(weight):
+    return weight * 0.45
+
+
+def kg_to_lbs(weight):
+    return weight/0.45
+
+well we go to our project panel and right click VENV folder -->new-->file -->name it converters.py-->cut and paste the code to converters.py
+
+then to call it on app.py you code it like this:
+import converters
+
+print(converters.kg_to_lbs(70) )
+
+this returns 155.55555554
+
+now instead of importing the entire module we can import just a single function or all the functions we want but we can specify which ones like this:
+import converters
+from converters import kg_to_lbs
+
+print(kg_to_lbs(100) )
+
+this returns: 222.2222222223
+
+the difference is that when we are specific about what all we want to import we dont have to add the dot modifier" converters. " whatever to the code. we just call it.
+
+So as an example we want a module called utility that has a function in it that can find the highest number in any array that we can call and use on App.js We do it like this:
+
+For utils.py
+def find_max(numbers):
+    max = numbers[0]
+    for number in numbers:
+        if number > max:
+            max = number
+        return max
+
+for App.py
+from utils import find_max
+numbers =[10,3,6,2]
+max = find_max(numbers)
+print(max)
+
+it returns: 10
+
+				Packages
+So what happens when we create 1000's of modules? Packages help us keep everything organized. A package is a folder to hold multiple files.
+
+right click project--> add new--> directory-->name it ecommerce--> right click the folder ecommerce-->add new python file--> call the file __init__ **two underscores each side***
+
+now you can create modules for it so-->right click the folder ecommerce-->add-->new file--> name it "shipping.py"
+def calc_shipping():
+    print("calc_shipping")
+
+now to c all it back on app.py:
+import ecommerce.shipping
+ecommerce.shipping.calc_shipping()
+
+that works...but it is laborious!! this is much easier to call specifcally what we want....:
+from ecommerce.shipping import calc_shipping
+calc_shipping()
+
+				Generating Random Values
+Python comes preloaded with several packages that are very useful. Like handling emails, generating random passwords etc.
+
+you can find all the modules here:
+https://docs.python.org/3/py-modindex.html
+
+but how do we code it etc? This will call 3 numbers at random between 0-1... like this, using the inbuilt random package module random..
+
+import random
+
+for i in range(3):
+    print(random.random())
+
+ this one will generate 3 random numbers between 10 and 20:
+import random
+
+for i in range(3):
+    print(random.randint(10,20))
+
+we are using the randint (random integer) function inside the package random...
+
+how about picking a random person from a list of team memebrs? Or random dinner meals? etc...
+
+import random
+
+members= ['spaghettt', 'stew', 'catfish', 'fried chicken', 'lasagna', 'enchiladas', 'vegetable soup', 'pizza']
+meal = random.choice(members)
+print(meal)
+
+for a radom 6 sided dice for craps....or D20 if your cool!!.......lol
+import random
+
+class Dice:
+    def roll(self):
+        first = random.randint(1, 6)
+        second = random.randint(1, 6)
+        return first, second
+
+
+dice = Dice()
+print(dice.roll())
+
+
+				Working with directories
+basically how do we move up or down folders?
+like this:
+from pathlib import Path
+
+path = Path("ecommerce")
+print(path.exists())
+
+the above checks to see if the file exists.
+
+from pathlib import Path
+
+path = Path("emails")
+print(path.mkdir())
+
+the above makes a folder called emails
+
+from pathlib import Path
+
+path = Path("emails")
+print(path.rmdir())
+
+the above removes the directory called emails
+
+you can write a little program to go over all the spreadsheets in adirectory and open them and process them too.. as an example.. like this:
+from pathlib import Path
+
+path = Path()
+print(path.glob('*.py'))
+
+this would return all the python files... if you changed *.py to *.xls it would return all the spreadsheets...etc. *.* returns everything in the directory. when you leave the Path() empty like that it means the current directory. However in this form it returns them as an unreadable object. We should itterate over this object so we can read them like this:
+
+from pathlib import Path
+
+path = Path()
+for file in path.glob('*.py'):
+    print(file)
+
+this returns:
+app.py
+converters.py
+utils.py
+
+				PyPi and PIP
+Python package index = PyPi
+https://pypi.org/
+
+basically packages other people have written that we can use ..whether web crawlers or SMS functionality ...pretty much anything you can imagine.
+
+one we need is openpyxl.. we  use this to work with excel spreadsheets.
+
+search for it on PYpi..
+you will see a key like this with a copy icon next to it: copy it.
+pip install openpyxl
+ 
+then on the TERMINAL of pycharm paste it
+
+pip= the installer for Python.
 
 ->
