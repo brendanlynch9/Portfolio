@@ -1,2 +1,34 @@
 # Portfolio
-A portfolio of proof of language ability. Please note to save space all dependencies have been removed from the files. The essence of the languages and functionality is being displayed. I have learned HTML5, CSS3, Javascript, React, React Native, Mongo DB, Express javascript, Node, Linux, Apache, Mysql, PHP, Custom wordpress, Graph QL, C#,  ASP.Net MVC, unit testing with Jest  and many more. There is a summary of notes (like 400 pages typed so far and growing.. displayed as a commented out HTML file.) learned from countless bootcamps (angela Yu udemy web dev for 2020), Youtube videos (Mosh Hamedani , maximillian schwarzmueller etc.) and books etc.  I hope to be able to work as a humble MERN/React native or LAMP, or Custom wordpress developer. I spent many years working in medicine as an EMT and pharmacy Tech and am attempting to transition to a new career (I was injured saving others). Thank you for taking the time to read the ReadME.  I wish you all well.
+Hello, 
+
+I am a Python/Django (my preffered Stack), MERN (second favorite stack), React Native(mobile apps via expo), LAMP, Custom Wordpress programmer and web developer. Each of the above folders contains examples of proof of knowledge and examples of work done sans dependencies (to save space and be able to upload it all onto github).
+
+I am familiar with the following:
+HTML5
+CSS3/Zurb
+Javascript
+MongoDB
+Express Javascript
+React
+Redux
+React Native
+Node 
+GraphQl
+Linux
+Apache
+MySql
+PHP
+Wordpress (custom)
+C#
+Asp.net MVC
+Python
+Django
+Anaconda
+Tensor flow, Scikit, Numpy
+Jest for unit testing
+Git/Github (obviously)
+NPM/Gulp/etc. for task runners
+preprocessors
+cyber security (Oauth, Wireshark, Kali linux etc.)
+
+unity (in progress)
