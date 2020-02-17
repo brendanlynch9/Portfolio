@@ -32,3 +32,5 @@ preprocessors
 cyber security (Oauth, Wireshark, Kali linux etc.)
 
 unity (in progress)
+
+*********************Please see my Living project "Code notes.html" for any bene gravis needed.
