@@ -9652,4 +9652,592 @@ now to visualize this we need to install an extension into vs code. Search for:
 Then back on the code page for the dot file click the three dots on the Right hand top corner. And select "open preview to the side".
 
 voila. you can see the decision tree.
+	 
+	 DJANGO
+A popular framework to build web applications with. Their motto:
+ "A web farmework for perfectionists with deadlines"
+Instagram, spotify, youtube, washington post etc. are all built with Django....
+
+so open pycharm and start a new project and name it: "pyshop"
+-->then downon the bottom open a terminal window-->pip install django
+
+then you need to type:
+
+django-admin startproject pyshop .
+
+just like that with spaces and period at the end and all....
+
+now what that does is create a folder for pyshop under pyshop. Inside the second pyshop folder your going to see:
+
+__init__.py     (This folder is a package.this means you can import modules to your program)
+settings.py    (this is where you define various settings for our application)
+urls.py             (what the user should see when they go to /about or /shoppingcart orwhatever)
+wsgi.py          (web server gateway interface. Purpose is to provide standard interface between applications built with django and web servers)
+
+now outside that folder we also have a new file callled:
+manage.py    (with this we can start our web server, or work with our databse etc.)
+
+now go back to terminal and type -->python manage.py runserver-->you will then see your first django website.
+
+				Your first App
+so in django projects lets suppose you wanted to build Amazon. Well we break amazon down into several different apps. For example we would build an app for customer management. Another app for product management. Another for blogs. etc. Then we combine all these apps together and this creates Amazon.
+
+so for this tutorial we are going to build a shop. But if after we are done you wanted to add a blog on to the same website you would just come back and make another app for that. Now the beauty of this is that we can reuse our apps across different django projects thus. Because each app is essentially a python package that we can call.
+
+now go back to your terminal window and click the + button to open up a new terminal window...because the other one is busy running our server....and type:
+
+python manage.py startapp products
+
+and then you will have a new folder called products... the 3 important files are:
+
+models.py (where you create classes or new types for modeling concepts in this app... for example we have concepts like product category or review etc.)
+tests.py (where we write automated tests)
+views.py (what the user should see when they navigate to a certain page)
+
+
+				Creating your first view function
+
+A view function is what the viewer seees when they navigate to a particular page.
+Basically this is your HTML css and javascript.
+
+so inside products folder open up views.py
+
+from django.http import HttpResponse
+from django.shortcuts import render
+
+
+def index(request):
+    return HttpResponse('hello world')
+
+
+now unfortunately this is not good enough. Because django doesnt know where to call this function.
+
+					URL Mapping
+basically we need to tell django when someone types /products that it needs to display the code we wrote. Hence URL mapping. so go back to products folder and right click-->new-->python file-->name it "urls" then:
+
+from django.urls import path
+from . import views
+
+
+# /products
+# /products/1/detail
+# /products/new
+
+urlpatterns = [
+    path('', views.index )
+]
+
+now we have succesfully mapped the code we wrote for /products to a URL mapper...but we need to make django aware of that fact ...so open up pyshop folderand you will see another urls there. You can change the code to this (dont forget you can click on the three"..."'s to expand the view and see the import statements:
+"""pyshop URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/2.1/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  path('', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.urls import include, path
+    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+"""
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('products/', include('products.urls'))
+]
+
+
+Now we will have a /products page....
+
+So as a challenge we could try to make a page for products/new... to do that we change the aproos files like this:
+
+we change views.py to:
+from django.http import HttpResponse
+from django.shortcuts import render
+
+
+def index(request):
+    return HttpResponse('hello world')
+
+
+def new(request):
+    return HttpResponse('New Products')
+
+
+and we change products\urls to:
+
+from django.urls import path
+from . import views
+
+
+# /products
+# /products/1/detail
+# /products/new
+
+urlpatterns = [
+    path('', views.index ),
+    path('new', views.new)
+]
+
+so now we can create paths for both brand new paths by following the samestep like an /about us page or /blog or whatever... and we can go deeper with our paths and create pages like /about us/our history etc.
+
+					Models
+A model is a representation of a real world concept...like order, customer, product, review,shopping cart etc.
+
+so in products--->open models.py
+
+from django.db import models
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.FloatField()
+    stock = models.IntegerField()
+    image_url = models.CharField(max_length=2083)
+
+Note* for names you want to by convention limit it to 255 characters because otherwise it can break our app. For images however since we are going to be copy pasting URL's from google... sometimes they can be long so the convention for that is a max length of 2083 charchters.
+
+					Migrations
+Now django starts off with DB sqlite.. which is good for small apllications. It is not good for enterprise level apps. For those you need MySql, or PostgreSql or etc. For this tutorial lets go to the web and search for a viewer for db sqlite. So go to google and type:
+
+https://sqlitebrowser.org/dl/
+
+then after install run the progam and click open database -->pycharm projects-->pyshop2-->dbsqlite
+
+now the tables is empty. So when we create one we need to name it all the items in our product class.... ie(name, price, stock, image_url). We are going to have django do it for us....
+
+so go to terminal window on python and type:
+
+manage.py makemigrations
+
+but when we do this we get an error message "No changes detected"... because python needs us to do something first!!
+
+so go to pyshop2 folder-->settings.py and change code beginning on line 33 from:
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+to:
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'products.apps.ProductsConfig'
+]
+
+basically your setting the path to the app you created. Now go back to the terminal where you had typed the command before and press the up arrow to get the same command back again or just retype it (manage.py makemigrations)... either way when you run it this time you will get a different result:
+
+Migrations for 'products':
+  products\migrations\0001_initial.py
+    - Create model Product
+
+now go back to the terminal and type:
+
+manage.py migrate
+
+now if you reopen your dbsqlite you will see every database from every app for pyshop2.
+
+so all we have to do to make a databse ready for CRUD is to create a class in models.py and isssue out 2 commands in the terminal!!!!!!!!!!!!
+
+So now lets put it all otgether by creating a model and migrating it for "offer" that has fields for discount 20% off etc. so on models.py:
+
+from django.db import models
+
+
+class Product(models.Model):
+    name = models.CharField(max_length=255)
+    price = models.FloatField()
+    stock = models.IntegerField()
+    image_url = models.CharField(max_length=2083)
+
+
+class Offer(models.Model):
+    code = models.CharField(max_length=10)
+    description = models.CharField(max_length=255)
+    discount = models.FloatField()
+
+then in terminal:
+
+manage.py makemigrations
+
+then in terminal again:
+
+python manage.py migrate
+
+Reload database on dbsqlite... it should be there.
+
+
+						Admin
+if you go to the website on the server and type /admin you will see a beautiful admin page. To work with this page we need to create a super user. To do this we go to terminal in pycharm and type:
+
+python manage.py createsuperuser
+
+it asks for a user name ... so you can type "admin" ... for email address.. and a password.
+
+then back in the browser login with admin and password.
+
+once we are logged in we can manage our application... to have it display the prodcuts folder in the admin area so we can manage them there...we go to the admin.py under migrations...
+
+from django.contrib import admin
+from .models import Product
+
+admin.site.register(Product)
+
+with this if we go to the admin panel and refresh the page we will see a new section called products.
+
+then as an example lets say we want to add oranges to our catalog online of products. Just click the plus sign and the model will be displayed ready to be filled out. ***to get a copyright free image just google for anything...like "orange"...click on tools under usage rights select "labeled for reuse"...click the image and go to their site.... right click the image copy link address...then paste it into the url field on django admin and save. 
+
+Now everything is good it saved a product but unfortunately it says "Product1" on the table and that can be confusing. We want it to say oranges on our product table. so to fix that:
+
+					Customizing the Admin
+Basically we need to change the admin.py:
+
+from django.contrib import admin
+from .models import Product
+
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'stock')
+
+
+admin.site.register(Product, ProductAdmin)
+
+this way we can get all the descriptos from models.py onto the table being displayed on admin.py and the admin page (except we left off the image URL from the model because it would be silly to put that into a table).
+
+
+
+now essentially you repeat this process for all your other models. So since we have a coupon offer model as well then we change the code to this:
+
+from django.contrib import admin
+from .models import Product, Offer
+
+
+class OfferAdmin(admin.ModelAdmin):
+    list_display = ('code', 'discount')
+
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ('name', 'price', 'stock')
+
+
+admin.site.register(Offer, OfferAdmin)
+admin.site.register(Product, ProductAdmin)
+
+
+					Templates
+When we go to our /products page all we see is "hello world".... we want to replace this with a list of products we created!
+
+in pycharm under the products app open up the views.py--> we need to import all our work from the database for our products:
+
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Product
+
+
+def index(request):
+   products = Product.objects.all()
+    return HttpResponse('hello world')
+
+
+def new(request):
+    return HttpResponse('New Products')
+
+then we need to create a folder under products for HTML. so Right click products-->new directory and name it "templates" 
+
+inside the templates folder -->add new file--> name it "index.html"
+<h1>Products</h1>
+<ul>
+    <li>Item 1</li>
+     <li>Item 1</li>
+     <li>Item 1</li>
+     <li>Item 1</li>
+</ul>
+
+so now that we have entered some HTML we want to call our products from the views.py
+
+from django.http import HttpResponse
+from django.shortcuts import render
+from .models import Product
+
+
+def index(request):
+   products = Product.objects.all()
+   return render(request, 'index.html', {'products': products})
+
+
+def new(request):
+    return HttpResponse('New Products')
+
+
+now in order to dynamically pull in data.... now that we can ... from the database and display it back on index.html we change the code to:
+
+<h1>Products</h1>
+<ul>
+    {% for product in products%}
+        <li>{{ product.name }}</li>
+    {% endfor %}
+</ul>
+
+Then to dynamically render the price of each item....:
+
+<h1>Products</h1>
+<ul>
+    {% for product in products%}
+        <li>{{ product.name }} (${{product.price }})</li>
+    {% endfor %}
+</ul>
+
+
+ok so for templates there are two important things to know. One we use 
+
+{%  %} scriplet tags to write For loops to loop over a bunch of stuff or to write If statements.
+&
+{{ }} scriplet tags are used to call the information values dynamically
+
+
+				Adding Bootstrap
+
+Now all that looks horrible! sure it works but really it sucks! So lets add some bootstrap....
+
+so go to bootstrap-->documentation-->scroll down until you see starter template-->copy it
+
+pycharm-->right click templates folder-->create new file--> name it "base.html"-->paste it there.
+
+then in the body section of the base.html delete the "Hello world" H1 and change it to:
+
+{% block content %}
+{% endblock %}
+
+so depending on what year these notes are read it should look something like this:
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    {% block content %}
+    {% endblock %}
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+now we want to be able to call this over onto our index.html... so over there we should change the code to :
+
+{% extends 'base.html' %}
+
+{% block content%}
+    <h1>Products</h1>
+    <ul>
+        {% for product in products%}
+            <li>{{ product.name }} (${{product.price }})</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}
+
+
+this will allow whats between the block content and end block to be rendered on the base.html.
+
+Now we can replace the bullet points with bootstrap cards...
+
+				Rendering Cards
+to get a card template from bootstrap...
+
+go to bootstrap-->documentation--> on left hand side click components-->card-->copy
+
+now under the H1--> div.row +tab then div.col+tab--> paste the bootstrap inbetween the div. column open and close div.--> now that looks ugly so click code -->reformat code to beuatify it.
+
+{% extends 'base.html' %}
+
+{% block content%}
+<h1>Products</h1>
+<div class="row">
+    <div class="col">
+        <div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                    card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>
+<ul>
+    {% for product in products%}
+    <li>{{ product.name }} (${{product.price }})</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
+
+now we need to move our for loop around a bit and change some stuff.. but the end code should look like this:
+
+{% extends 'base.html' %}
+
+{% block content%}
+    <h1>Products</h1>
+    <div class="row">
+        {% for product in products%}
+            <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="{{product.image_url}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{product.name}}</h5>
+                    <p class="card-text">${{product.price}}</p>
+                    <a href="#" class="btn btn-primary">Add to Cart</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+				Finishing touches
+We should add some padding around the images and add a navabr etc.
+
+to add a navabar-->bootstrap website-->documentation-->component on left hand side list -->navabar--> copy
+
+then back on pycharm-->base.html right below body tag paste the bootstrap code for the navbar
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">PyShop</a>
+</nav>
+    <div>
+    {% block content %}
+    {% endblock %}
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+
+
+now the problem becomes we dont want to have to recreate this base template for every app we create!! So we need to move base.html...
+
+so in the root of our folder "Pyshop" folder... we need to add a new directory called templates.
+
+right click pyshop folder-->add new directory-->name it templates.
+
+then go back to the templates for products app folder and drag the base.html to the main templates folder we just created. Now our base template is somewhere central so we can use it in multiple apps. HOWEVER... our page fro products is not going to be pointing at the right location anymore... if you reload /products you will get an error.
+
+to fix this go to pyshop-->settings.py--> line 55 or so you should see:
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+change it to:
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+
+then finally to give our app some padding etc. we just need to wrap it in a container div... so back on base.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+  <nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">PyShop</a>
+</nav>
+    <div>
+        <div class="container">
+    {% block content %}
+    {% endblock %}          
+        </div>
+  
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
+
 ->
